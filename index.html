@@ -308,6 +308,107 @@ body {
     border-top: 2px solid #e8f5e8;
     font-weight: 500;
 }
+/* 👨‍💻 قسم إنستغرام المُحدث - أيقونة أصغر */
+.instagram-section {
+    background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+    border-radius: 20px;
+    padding: 25px;
+    margin-top: 40px;
+    text-align: center;
+    box-shadow: 0 10px 40px rgba(131,58,180,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.instagram-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: repeating-conic-gradient(from 0deg, transparent, transparent 10px, rgba(255,255,255,0.1) 10px, rgba(255,255,255,0.1) 20px);
+    animation: rotate 20s linear infinite;
+    z-index: 0;
+}
+
+.instagram-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* 👈 الأيقونة أصغر وأجمل */
+.instagram-icon {
+    font-size: 36px; /* تم تقليل الحجم من 48px إلى 36px */
+    margin-bottom: 12px;
+    filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+    animation: bounce 2s infinite;
+}
+
+.instagram-title {
+    color: white;
+    font-size: 20px; /* قليلاً أصغر */
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    line-height: 1.4;
+}
+
+.instagram-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.95);
+    color: #833ab4;
+    padding: 14px 28px; /* قليلاً أصغر */
+    border-radius: 50px;
+    font-size: 17px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.instagram-link:hover {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 12px 35px rgba(131,58,180,0.5);
+    color: #fd1d1d;
+    background: white;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 👆 حركة تنبيه جميلة للأيقونة */
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-8px); }
+    60% { transform: translateY(-4px); }
+}
+
+@media (max-width: 768px) {
+    .instagram-section {
+        margin: 20px 10px 0;
+        padding: 20px 15px;
+    }
+    
+    .instagram-icon {
+        font-size: 32px; /* أصغر على الموبايل */
+    }
+    
+    .instagram-title {
+        font-size: 18px;
+    }
+    
+    .instagram-link {
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+}
 </style>
 
 </head>
@@ -357,7 +458,7 @@ body {
             <input type="text" class="form-control" id="birth" placeholder="يوم/شهر/سنة">
         </div>
 
-        <button class="btn-official" onclick="showResult()">🔍 البحث عن النتيجة</button>
+        <button class="btn-official" onclick="showResult()"> البحث عن النتيجة</button>
 
         <div class="loading" id="loading">
              جاري أستظهار النتيجة ... 
@@ -383,6 +484,14 @@ body {
     <div class="footer-note">
         الموقع الإلكتروني الرسمي لنتائج البكالوريا 2026<br>
         جميع الحقوق محفوظة © الديوان الوطني للامتحانات والمسابقات
+    </div>
+      <!-- 👇 قسم إنستغرام الجديد -->
+    <div class="instagram-section">
+        <div class="instagram-icon"></div>
+        <div class="instagram-title">تابعني على أنستغرام </div>
+        <a href="https://www.instagram.com/sidahmed_mrt14/?hl=fr" target="_blank" class="instagram-link">
+            @sidahmed_mrt14 
+        </a>
     </div>
 </div>
 
@@ -439,12 +548,12 @@ function showResult() {
         if (parseFloat(avg) >= 10) {
             statusEl.innerHTML = "🎉 <strong>ناجح</strong> 🎓";
             statusEl.className = "result-status success";
-            noteEl.textContent = "بصحتك ياوحد ثعلوب (ة) ";
+            noteEl.textContent = "بصحتك ياوحد ذيب (ة) ";
             noteEl.style.color = "#2e7d32";
         } else {
             statusEl.innerHTML = "❌ <strong>راسب</strong>";
             statusEl.className = "result-status failed";
-            noteEl.textContent = "حمار(ة) كون قرت مشي خير";
+            noteEl.textContent = "حمار(ة) كون قريت مشي خير";
             noteEl.style.color = "#d32f2f";
             noteEl.style.background = "linear-gradient(135deg, #ffebee, #ffcdd2)";
             noteEl.style.borderColor = "#f44336";
