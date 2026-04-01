@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الديوان الوطني للامتحانات والمسابقات</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Tahoma', Arial, sans-serif;
+    background: linear-gradient(135deg, #e8f4f8 0%, #d1ecf1 100%);
+    min-height: 100vh;
+    direction: rtl;
+}
+
+.header-bar {
+    background: linear-gradient(90deg, #006400, #008000, #006400);
+    height: 6px;
+    margin-bottom: 10px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+    text-align: center;
+    border-top: 4px solid #006400;
+}
+
+.logo-dz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.flag-dz {
+    width: 50px;
+    height: 30px;
+}
+
+.logo-text {
+    font-size: 14px;
+    color: #006400;
+    font-weight: bold;
+    line-height: 1.3;
+}
+
+.title-main {
+    color: #004d40;
+    font-size: 26px;
+    font-weight: bold;
+    margin: 15px 0;
+}
+
+.subtitle {
+    color: #2e7d32;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.form-container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,100,0,0.1);
+    padding: 35px;
+    max-width: 520px;
+    margin: 0 auto 30px;
+    border: 2px solid #e8f5e8;
+}
+
+.form-title {
+    text-align: center;
+    color: #004d40;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 4px solid #006400;
+    position: relative;
+}
+
+.form-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    right: 50%;
+    transform: translateX(50%);
+    width: 30px;
+    height: 4px;
+    background: #006400;
+}
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group label {
+    display: block;
+    color: #004d40;
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 16px;
+    border: 2px solid #c8e6c9;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s;
+    background: #f1f8e9;
+    color: #2e7d32;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #006400;
+    box-shadow: 0 0 12px rgba(0,100,0,0.2);
+    background: white;
+}
+
+.math-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+    padding: 18px;
+    border: 3px solid #4caf50;
+    border-radius: 10px;
+    margin: 25px 0;
+    box-shadow: 0 4px 12px rgba(76,175,80,0.2);
+}
+
+.math-question {
+    font-size: 26px;
+    font-weight: bold;
+    color: #2e7d32;
+    flex: 1;
+    text-align: right;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.math-answer {
+    width: 55px !important;
+    height: 48px;
+    padding: 0;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    border: 4px solid #2e7d32 !important;
+    border-radius: 10px;
+    background: white;
+    color: #006400;
+}
+
+.math-answer:focus {
+    border-color: #004d40 !important;
+    box-shadow: 0 0 15px rgba(0,77,64,0.4);
+    transform: scale(1.08);
+}
+
+.btn-official {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, #2e7d32, #1b5e20);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 15px rgba(46,125,50,0.3);
+}
+
+.btn-official:hover {
+    background: linear-gradient(135deg, #1b5e20, #0d3d0d);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(46,125,50,0.4);
+}
+
+.loading {
+    display: none;
+    text-align: center;
+    padding: 25px;
+    background: linear-gradient(135deg, #e8f5e8, #c8e6c9);
+    border-radius: 10px;
+    margin-top: 25px;
+    font-size: 18px;
+    color: #2e7d32;
+    border: 2px solid #4caf50;
+}
+
+.loading::before {
+    content: '⏳ ';
+    font-size: 28px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.result-card {
+    display: none;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,100,0,0.15);
+    padding: 35px;
+    margin-top: 25px;
+    border-top: 6px solid #006400;
+    border: 2px solid #e8f5e8;
+}
+
+.result-header {
+    text-align: center;
+    color: #004d40;
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 3px solid #2e7d32;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 25px;
+    background: #f1f8e9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.result-table td {
+    padding: 18px 16px;
+    border-bottom: 1px solid #c8e6c9;
+    font-size: 16px;
+}
+
+.result-table td:first-child {
+    background: #e8f5e8;
+    font-weight: bold;
+    color: #004d40;
+    width: 45%;
+}
+
+/* 👈 الملاحظة الجديدة */
+.result-note {
+    background: linear-gradient(135deg, #fff8e1, #ffecb3);
+    border: 2px solid #f57c00;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #e65100;
+    box-shadow: 0 4px 15px rgba(245,124,0,0.2);
+}
+
+.result-status {
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    padding: 30px;
+    border-radius: 15px;
+    margin-top: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    position: relative;
+}
+
+.success { 
+    background: linear-gradient(135deg, #c8e6c9, #a5d6a7); 
+    color: #1b5e20; 
+    border: 5px solid #4caf50; 
+}
+.failed { 
+    background: linear-gradient(135deg, #ffcdd2, #ef9a9a); 
+    color: #b71c1c; 
+    border: 5px solid #e53935; 
+}
+
+.footer-note {
+    text-align: center;
+    color: #4caf50;
+    font-size: 13px;
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 2px solid #e8f5e8;
+    font-weight: 500;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+    <div class="header-bar"></div>
+    
+    <div class="header">
+        <div class="logo-dz">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/77/Flag_of_Algeria.svg" class="flag-dz" alt="علم الجزائر">
+            <div class="logo-text">
+                الجمهورية الجزائرية الديمقراطية الشعبية<br>
+                <small>وزارة التربية الوطنية</small>
+            </div>
+        </div>
+        <div class="title-main">الديوان الوطني للامتحانات والمسابقات</div>
+        <div class="subtitle">نتائج امتحان شهادة التعليم المتوسط - البكالوريا 2026</div>
+    </div>
+
+    <div class="form-container">
+        <div class="form-title">أستظهار النتيجة</div>
+        
+        <div class="form-group">
+            <label>الاسم واللقب الكامل</label>
+            <input type="text" class="form-control" id="name" placeholder="أدخل الاسم واللقب">
+        </div>
+
+        <div class="form-group">
+            <label>رقم شهادة التسجيل</label>
+            <input type="text" class="form-control" id="num" placeholder="XXXXXXXX">
+        </div>
+
+        <div class="form-group">
+            <label>كلمة المرور السرية</label>
+            <input type="password" class="form-control" id="secret" placeholder="••••••••••">
+        </div>
+
+        <div class="math-row" id="mathRow">
+            <input type="text" class="math-question" id="question" readonly>
+            <input type="text" class="math-answer" id="answer" maxlength="2">
+        </div>
+
+        <div class="form-group">
+            <label>تاريخ الميلاد</label>
+            <input type="text" class="form-control" id="birth" placeholder="يوم/شهر/سنة">
+        </div>
+
+        <button class="btn-official" onclick="showResult()">🔍 البحث عن النتيجة</button>
+
+        <div class="loading" id="loading">
+             جاري أستظهار النتيجة ... 
+        </div>
+    </div>
+
+    <div class="result-card" id="result">
+        <div class="result-header">نقطة التلميذ الرسمية</div>
+        <table class="result-table">
+            <tr><td>الاسم واللقب</td><td id="r_name"></td></tr>
+            <tr><td>رقم شهادة التسجيل</td><td id="r_num"></td></tr>
+            <tr><td>تاريخ الميلاد</td><td id="r_birth"></td></tr>
+            <tr><td>الشعبة الدراسية</td><td id="r_branch"></td></tr>
+            <tr><td>المعدل العام</td><td id="r_avg"></td></tr>
+        </table>
+        
+        <!-- 👈 الملاحظة الجديدة -->
+        <div class="result-note" id="resultNote"></div>
+        
+        <div class="result-status" id="status"></div>
+    </div>
+
+    <div class="footer-note">
+        الموقع الإلكتروني الرسمي لنتائج البكالوريا 2026<br>
+        جميع الحقوق محفوظة © الديوان الوطني للامتحانات والمسابقات
+    </div>
+</div>
+
+<script>
+let correctAnswer = "";
+
+function generateQuestion() {
+    let a = Math.floor(Math.random() * 9) + 1;
+    let b = Math.floor(Math.random() * 9) + 1;
+    correctAnswer = (a + b).toString();
+    document.getElementById("question").value = `${a}+${b}`;
+    document.getElementById("answer").value = "";
+    document.getElementById("answer").focus();
+}
+
+window.onload = function() {
+    generateQuestion();
+};
+
+function showResult() {
+    let name = document.getElementById("name").value.trim();
+    let num = document.getElementById("num").value.trim();
+    let birth = document.getElementById("birth").value.trim();
+    let userAnswer = document.getElementById("answer").value.trim();
+
+    if (!name || !num || !birth) {
+        alert("⚠️ يجب تعبئة جميع الحقول المطلوبة");
+        return;
+    }
+
+    if (userAnswer !== correctAnswer) {
+        alert("❌ الإجابة غير صحيحة");
+        generateQuestion();
+        return;
+    }
+
+    document.getElementById("loading").style.display = "block";
+    document.getElementById("result").style.display = "none";
+
+    setTimeout(() => {
+        document.getElementById("r_name").textContent = name;
+        document.getElementById("r_num").textContent = num;
+        document.getElementById("r_birth").textContent = birth;
+
+        let branches = ["علوم تجريبية", "رياضيات", "آداب وفلسفة", "تقني رياضي", "علوم تجارية", "لغات أجنبية"];
+        let avg = (Math.random() * 10 + 9.5).toFixed(2);
+        
+        document.getElementById("r_branch").textContent = branches[Math.floor(Math.random() * branches.length)];
+        document.getElementById("r_avg").textContent = avg + "/ 20.00";
+
+        let statusEl = document.getElementById("status");
+        let noteEl = document.getElementById("resultNote");
+        
+        if (parseFloat(avg) >= 10) {
+            statusEl.innerHTML = "🎉 <strong>ناجح</strong> 🎓";
+            statusEl.className = "result-status success";
+            noteEl.textContent = "بصحتك ياوحد ثعلوب (ة) ";
+            noteEl.style.color = "#2e7d32";
+        } else {
+            statusEl.innerHTML = "❌ <strong>راسب</strong>";
+            statusEl.className = "result-status failed";
+            noteEl.textContent = "حمار(ة) كون قرت مشي خير";
+            noteEl.style.color = "#d32f2f";
+            noteEl.style.background = "linear-gradient(135deg, #ffebee, #ffcdd2)";
+            noteEl.style.borderColor = "#f44336";
+        }
+
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("result").style.display = "block";
+        
+        setTimeout(generateQuestion, 1500);
+
+    }, 3500);
+}
+</script>
+
+</body>
+</html>
